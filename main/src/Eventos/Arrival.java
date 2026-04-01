@@ -1,9 +1,9 @@
 package Eventos;
 
 import Entidades.Avion;
+import Eventos.FutureEventList;
+import Eventos.FutureEventList;
 import Recursos.Pista;
-import Tablas.TiempoAleatorioTablaDos;
-import Tablas.TiempoAleatorioTablaUno;
 
 public class Arrival implements Event {
 	private double clock;
