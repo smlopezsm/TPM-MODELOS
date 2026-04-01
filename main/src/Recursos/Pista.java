@@ -40,11 +40,11 @@ public class Pista {
         }
     }
 
-    public int getMaxTamañoCola() {
+    public int getMaxTamanoCola() {
         return maxTamCola;
     }
 
-    public int getMinTamañoCola() {
+    public int getMinTamanoCola() {
         return (minTamCola == Integer.MAX_VALUE) ? 0 : minTamCola; 
     }
 
@@ -56,7 +56,7 @@ public class Pista {
         return !colaDeEspera.isEmpty();
     }
     
-    public int getTamañoCola() {
+    public int getTamanoCola() {
         return colaDeEspera.size();
     }
 }

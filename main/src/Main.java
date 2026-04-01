@@ -18,10 +18,15 @@ public class Main{
 
 		Pista p1= new Pista(1);
 		double clock = 0;
-		while(clock <40320){
-			Event e = fel.inminent();
-			e.execute(p1, fel);
-			clock= e.clock();
-		}
+        try {
+            while (clock < 40320) {
+                Event e = fel.inminent();
+                e.execute(p1, fel);
+                clock = e.clock();
+            }
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+            System.err.println("La simulacion fue interrumpida: " + ex.getMessage());
+        }
 	}
 }
