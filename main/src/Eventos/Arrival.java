@@ -9,10 +9,10 @@ public class Arrival implements Event {
 	private double clock;
 	private int order = 100;
 	private static int contadorAviones = 1;
-    private TiempoAleatorioTablaDos t2 = new TiempoAleatorioTablaDos();
-    private Thread t = new Thread(t2);
-    private  TiempoAleatorioTablaUno t1 = new TiempoAleatorioTablaUno();
-    private Thread t0 = new Thread(t1);
+    private TiempoAleatorioTablaDos tabla2 = new TiempoAleatorioTablaDos();
+    private Thread t = new Thread(tabla2);
+    private  TiempoAleatorioTablaUno tabla1 = new TiempoAleatorioTablaUno();
+    private Thread t0 = new Thread(tabla1);
 	public Arrival(double clock){
 		this.clock = clock;
 	}
@@ -28,20 +28,20 @@ public class Arrival implements Event {
             nuevoAvion.setTiempoInicioAterrizaje(this.clock);
             
             //calculamos cuánto tarda en aterrizar (aca usar generador con la tabla 2)
-            Thread t = new Thread(t2);
+            Thread t = new Thread(tabla2);
             t.start();
             t.join();
             double tiempoAterrizaje;
-            tiempoAterrizaje = t2.getResultado();
+            tiempoAterrizaje = tabla2.getResultado();
             fel.insert(new EndOfService(this.clock + tiempoAterrizaje, nuevoAvion));
         }
 
         //BOOTSTRAPPING (planificar el próximo arribo) calculamos cuanto falta para que llegue el sig avion usando la tabla 1
-        Thread t0 = new Thread(t1);
+        Thread t0 = new Thread(tabla1);
         t0.start();
         t0.join();
         double tiempoParaElProximo;
-        tiempoParaElProximo = t1.getResultado();
+        tiempoParaElProximo = tabla1.getResultado();
         fel.insert(new Arrival(this.clock + tiempoParaElProximo));
     }
 

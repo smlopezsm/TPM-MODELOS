@@ -19,10 +19,12 @@ public class Main{
 		Pista p1= new Pista(1);
 		double clock = 0;
         try {
-            while (clock < 40320) {
+            while (clock < 40) {
                 Event e = fel.inminent();
                 e.execute(p1, fel);
                 clock = e.clock();
+                System.out.println(e);
+                System.out.println(clock);
             }
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
