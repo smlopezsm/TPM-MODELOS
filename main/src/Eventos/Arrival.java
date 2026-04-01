@@ -1,18 +1,18 @@
 package Eventos;
 
 import Entidades.Avion;
-import Eventos.FutureEventList;
-import Eventos.FutureEventList;
 import Recursos.Pista;
+import Tablas.TiempoAleatorioTablaDos;
+import Tablas.TiempoAleatorioTablaUno;
 
 public class Arrival implements Event {
 	private double clock;
 	private int order = 100;
 	private static int contadorAviones = 1;
+
     private TiempoAleatorioTablaDos tabla2 = new TiempoAleatorioTablaDos();
-    private Thread t = new Thread(tabla2);
     private  TiempoAleatorioTablaUno tabla1 = new TiempoAleatorioTablaUno();
-    private Thread t0 = new Thread(tabla1);
+
 	public Arrival(double clock){
 		this.clock = clock;
 	}

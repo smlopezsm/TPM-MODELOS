@@ -5,14 +5,14 @@ import java.util.Queue;
 import Entidades.Avion;
 
 public class Pista {
-    private int id;
+    //private int id;
     private boolean ocupada;
     private Queue<Avion> colaDeEspera;
     private int maxTamCola;
     private int minTamCola;
 
     public Pista(int id) {
-        this.id = id;
+        //this.id = id;
         this.ocupada = false;
         this.colaDeEspera = new LinkedList<>();
         this.maxTamCola = 0;
