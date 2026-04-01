@@ -3,7 +3,7 @@ package Tablas;
 import java.util.Random;
 public class TiempoAleatorioTablaUno implements Runnable{
 
-    private int resultado;
+    private volatile int resultado;
     private final Random random = new Random();
 
     @Override

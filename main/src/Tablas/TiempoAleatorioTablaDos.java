@@ -3,7 +3,7 @@ package Tablas;
 import java.util.Random;
 
 public class TiempoAleatorioTablaDos implements Runnable{
-    private int resultado;
+    private volatile int resultado;
     private final Random random = new Random();
 
     @Override
@@ -20,7 +20,7 @@ public class TiempoAleatorioTablaDos implements Runnable{
             resultado =15;
         }
     }
-
+    // ver las variables atomicas y las condiciones de cadenas
     public int getResultado(){
         return resultado;
     }

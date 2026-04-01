@@ -5,5 +5,5 @@ import Recursos.Pista;
 public interface Event{
 	double clock();
 	int order();
-    void execute(Pista pista, FutureEventList fel);
+    void execute(Pista pista, FutureEventList fel) throws InterruptedException;
 }
