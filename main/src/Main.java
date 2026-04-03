@@ -5,7 +5,7 @@ import Eventos.Arrival;
 import Eventos.EndOfService;
 import Recursos.Pista;
 
-import javax.xml.stream.util.EventReaderDelegate;
+//import javax.xml.stream.util.EventReaderDelegate;
 
 public class Main{
 	public static void main(String[] args){
