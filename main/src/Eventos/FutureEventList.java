@@ -33,6 +33,15 @@ public class FutureEventList {
         this.events.sort(this.comparator);
     }
 
+    //hacer el to string de la truipla de la fel
+    @Override
+    public String toString() {
+        return "FutureEventList{" +
+                "events=" + events +
+                ", comparator=" + comparator +
+                '}';
+    }
+
     public Event inminent() {
         return this.events.remove(0);
     }

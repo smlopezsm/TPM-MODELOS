@@ -10,21 +10,19 @@ import javax.xml.stream.util.EventReaderDelegate;
 public class Main{
 	public static void main(String[] args){
 		FutureEventList fel = new FutureEventList();
-		fel.insert(new Arrival (567));
-		fel.insert(new Arrival (234));
-		fel.insert(new EndOfService (2523, new Avion(1111, 2)));
-		fel.insert(new Arrival (0));
-		fel.insert(new Arrival (23456));
-
+        fel.insert(new Arrival(0));
 		Pista p1= new Pista(1);
 		double clock = 0;
         try {
-            while (clock < 40) {
-                Event e = fel.inminent();
-                e.execute(p1, fel);
+            Event e = fel.inminent();
+            clock = e.clock();
+            while (clock < 100) {
+                e.execute(p1,fel);
                 clock = e.clock();
-                System.out.println(e);
-                System.out.println(clock);
+                System.out.println("Evento inminente: " + e);
+                System.out.println("tiempo: " + clock);
+                e = fel.inminent();
+                clock = e.clock();
             }
         } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
