@@ -25,25 +25,19 @@ public class Arrival implements Event {
             pista.setOcupada(true);
             nuevoAvion.setTiempoInicioAterrizaje(this.clock);
             
-            //calculamos cuánto tarda en aterrizar (aca usar generador con la tabla 2)
             double tiempoAterrizaje;
             tiempoAterrizaje = tabla2.delta();
             fel.insert(new EndOfService(this.clock + tiempoAterrizaje, nuevoAvion));
         }
 
-        //BOOTSTRAPPING (planificar el próximo arribo) calculamos cuanto falta para que llegue el sig avion usando la tabla 1
         double tiempoParaElProximo;
         tiempoParaElProximo = tabla1.delta();
         fel.insert(new Arrival(this.clock + tiempoParaElProximo));
     }
 
     @Override
-    public double clock() {
-        return this.clock;
-    }
+    public double clock() {return this.clock;}
 
     @Override
-    public int order() {
-        return this.order;
-    }
+    public int order() {return this.order;}
 }
