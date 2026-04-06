@@ -17,11 +17,13 @@ public class Arrival implements Event {
 
     @Override
     public synchronized void execute(Pista pista, FutureEventList fel) throws InterruptedException {
+        Estadisticas.getInstancia().registrarArribo();
         Avion nuevoAvion = new Avion(contadorAviones++, this.clock);
 
         if (pista.isOcupada()) {
             pista.agregarACola(nuevoAvion);
         } else {
+            Estadisticas.getInstancia().finalizarOcio(this.clock);
             pista.setOcupada(true);
             nuevoAvion.setTiempoInicioAterrizaje(this.clock);
             
@@ -40,4 +42,5 @@ public class Arrival implements Event {
 
     @Override
     public int order() {return this.order;}
+
 }

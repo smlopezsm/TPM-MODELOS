@@ -7,19 +7,21 @@ import Tablas.TiempoAleatorioTablaDos;
 public class EndOfService implements Event {
 	private double clock;
 	private int order = 200;
-    //private Avion avionSaliendo;
+    private Avion avionSaliendo;
     private TiempoAleatorioTablaDos tabla2 = new TiempoAleatorioTablaDos();
 
 	public EndOfService(double clock, Avion avion) {
         this.clock = clock;
-        //this.avionSaliendo = avion;
+        this.avionSaliendo = avion;
     }
 
     @Override
     public void execute(Pista pista, FutureEventList fel) throws InterruptedException {
         // (mandar estos datos a una clase "Estadisticas" global)
-        //double tiempoEspera = avionSaliendo.getTiempoInicioAterrizaje() - avionSaliendo.getTiempoArribo();
-        //double tiempoTransito = this.clock - avionSaliendo.getTiempoArribo();
+        double tiempoEspera = avionSaliendo.getTiempoInicioAterrizaje() - avionSaliendo.getTiempoArribo();
+        double tiempoTransito = this.clock - avionSaliendo.getTiempoArribo();
+        Estadisticas.getInstancia().registrarAterrizaje(tiempoEspera, tiempoTransito);
+
 
         if (pista.hayCola()) {
             Avion proximoAvion = pista.sacarDeCola();
@@ -31,6 +33,7 @@ public class EndOfService implements Event {
             fel.insert(new EndOfService(this.clock + tiempoAterrizaje, proximoAvion));
         } else {
             pista.setOcupada(false);
+            Estadisticas.getInstancia().iniciarOcio(this.clock);
         }
     }
 

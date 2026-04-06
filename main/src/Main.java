@@ -1,30 +1,45 @@
+
+import Eventos.Arrival;
 import Eventos.Event;
 import Eventos.FutureEventList;
-import Eventos.Arrival;
 import Recursos.Pista;
+import Eventos.Estadisticas;
+public class Main {
+    public static void main(String[] args) {
+        double tiempoFinSimulacion = 40320;
+        double clock = 0;
 
-//import javax.xml.stream.util.EventReaderDelegate;
+        Pista pista = new Pista(1);
+        FutureEventList lef = new FutureEventList();
 
-public class Main{
-	public static void main(String[] args){
-		FutureEventList fel = new FutureEventList();
-        fel.insert(new Arrival(0));
-		Pista p1= new Pista(1);
-		double clock = 0;
+        lef.insert(new Arrival(0));
+
         try {
-            Event e = fel.inminent();
-            clock = e.clock();
-            while (clock < 100) {
-                e.execute(p1,fel);
-                clock = e.clock();
-                System.out.println("Evento inminente: " + e);
-                System.out.println("tiempo: " + clock);
-                e = fel.inminent();
-                clock = e.clock();
+            while (clock < tiempoFinSimulacion) {
+                Event eventoActual = lef.inminent();
+                clock = eventoActual.clock();
+               // if (clock > tiempoFinSimulacion) break;
+                eventoActual.execute(pista, lef);
+
+               /* System.out.println(String.format("[%.0f] Ejecutando: %-15s | Cola en pista: %d",
+                        clock,
+                        eventoActual.getClass().getSimpleName(),
+                        pista.getMaxTamanoCola()));*/
             }
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-            System.err.println("La simulacion fue interrumpida: " + ex.getMessage());
+            int maxColaEncontrada = pista.getMaxTamanoCola();
+            if (!pista.isOcupada()) {
+                Estadisticas.getInstancia().finalizarOcio(clock);
+            }
+
+            Estadisticas.getInstancia().mostrarReporte(clock, pista.getMaxTamanoCola(), pista.getMinTamanoCola());
+
+
+        } catch (InterruptedException e) {
+            // Manejamos la excepción que arrojan tus hilos de las tablas aleatorias
+            System.err.println("La simulación fue interrumpida inesperadamente.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Error en la ejecución de la lista de eventos: " + e.getMessage());
         }
-	}
+    }
 }
