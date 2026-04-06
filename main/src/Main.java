@@ -15,19 +15,19 @@ public class Main {
         lef.insert(new Arrival(0));
 
         try {
-            while (clock < tiempoFinSimulacion) {
+            while (clock <= tiempoFinSimulacion) {
                 Event eventoActual = lef.inminent();
                 clock = eventoActual.clock();
-               // if (clock > tiempoFinSimulacion) break;
+                //if (clock > tiempoFinSimulacion) break;
                 eventoActual.execute(pista, lef);
 
-               /* System.out.println(String.format("[%.0f] Ejecutando: %-15s | Cola en pista: %d",
+               /*System.out.println(String.format("[%.0f] Ejecutando: %-15s | Cola en pista: %d",
                         clock,
                         eventoActual.getClass().getSimpleName(),
                         pista.getMaxTamanoCola()));*/
             }
-            int maxColaEncontrada = pista.getMaxTamanoCola();
-            if (!pista.isOcupada()) {
+            
+            if (pista.isOcupada()) {
                 Estadisticas.getInstancia().finalizarOcio(clock);
             }
 
