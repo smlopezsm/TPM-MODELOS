@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class FutureEventList {
+public class FutureEventList{
     private List<Event> events;
     private Comparator<Event> comparator;
 
@@ -33,7 +33,6 @@ public class FutureEventList {
         this.events.sort(this.comparator);
     }
 
-    //hacer el to string de la truipla de la fel
     @Override
     public String toString() {
         return "FutureEventList{" +

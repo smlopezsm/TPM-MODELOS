@@ -23,7 +23,7 @@ public class Estadisticas {
         return instancia;
     }
 
-    public void registrarArribo() { totalArribos++; }
+    public void registrarArribo() {totalArribos++; }
 
     public void registrarAterrizaje(double espera, double transito) {
         totalAterrizajes++;

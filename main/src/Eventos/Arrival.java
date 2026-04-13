@@ -16,7 +16,7 @@ public class Arrival implements Event {
 	}
 
     @Override
-    public synchronized void execute(Pista pista, FutureEventList fel) throws InterruptedException {
+    public void execute(Pista pista, FutureEventList fel)  {
         Estadisticas.getInstancia().registrarArribo();
         Avion nuevoAvion = new Avion(contadorAviones++, this.clock);
 

@@ -23,8 +23,8 @@ public class DistribucionUniforme implements IGeneradorAleatorio {
 
     @Override
     public double generar() {
-        // U(a,b) = a + (b - a) * U(0,1)
-        return min + (max - min) * random.nextDouble();
+        //U(a,b) = a + (b - a) * U(0,1)
+        return min + (max - min) * random.nextDouble(); // x = a + (b-a) * r
     }
 
     @Override

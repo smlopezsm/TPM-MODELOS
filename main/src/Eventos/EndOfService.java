@@ -16,7 +16,7 @@ public class EndOfService implements Event {
     }
 
     @Override
-    public void execute(Pista pista, FutureEventList fel) throws InterruptedException {
+    public void execute(Pista pista, FutureEventList fel)  {
         // (mandar estos datos a una clase "Estadisticas" global)
         double tiempoEspera = avionSaliendo.getTiempoInicioAterrizaje() - avionSaliendo.getTiempoArribo();
         double tiempoTransito = this.clock - avionSaliendo.getTiempoArribo();

@@ -2,6 +2,7 @@
 import Eventos.Arrival;
 import Eventos.Event;
 import Eventos.FutureEventList;
+import Generadores.DistribucionEmpiricaDiscreta;
 import Recursos.Pista;
 import Eventos.Estadisticas;
 public class Main {
@@ -11,6 +12,8 @@ public class Main {
 
         Pista pista = new Pista(1);
         FutureEventList lef = new FutureEventList();
+
+        Estadisticas.getInstancia().iniciarOcio(0);
 
         lef.insert(new Arrival(0));
 
@@ -34,12 +37,22 @@ public class Main {
             Estadisticas.getInstancia().mostrarReporte(clock, pista.getMaxTamanoCola(), pista.getMinTamanoCola());
 
 
-        } catch (InterruptedException e) {
-            // Manejamos la excepción que arrojan tus hilos de las tablas aleatorias
-            System.err.println("La simulación fue interrumpida inesperadamente.");
-            e.printStackTrace();
         } catch (Exception e) {
             System.err.println("Error en la ejecución de la lista de eventos: " + e.getMessage());
         }
+
+
+        //Prueba de  CFC con tabla 2
+        double[] valores = {8.00,10.00,13.00,15.00};
+        double[] prob = {0.38,0.32,0.1,0.2};
+        DistribucionEmpiricaDiscreta D = new DistribucionEmpiricaDiscreta(valores, prob);
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println(D.generar());
+        }
+
+
+
+
     }
 }

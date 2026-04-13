@@ -26,6 +26,38 @@ public class DistribucionEmpiricaDiscreta implements IGeneradorAleatorio {
         this.random = new Random();
     }
 
+    /**
+     * Construye la Función de Distribución Acumulada (CDF) a partir de probabilidades discretas.
+     *
+     * QUE HACE:
+     *   Convierte un array de probabilidades individuales P(X=x_i) en un array de probabilidades
+     *   acumuladas, donde cada posición i contiene la suma de todas las probabilidades desde el
+     *   inicio hasta ese punto: CDF[i] = P(X <= x_i).
+     *   Esta CDF es esencial para el método de la transformada inversa discreta.
+     *
+     * COMO LO HACE:
+     *   1. Recorre el array de probabilidades y calcula la suma acumulativa en cada posición.
+     *   2. Normaliza el último valor a 1.0 para corregir errores de punto flotante.
+     *   3. Valida que las probabilidades sumen aproximadamente 1.0.
+     *
+     * EJEMPLOS DE UTILIZACIÓN:
+     *   Dado: probs = [0.2, 0.5, 0.3]
+     *   Resultado: cdf  = [0.2, 0.7, 1.0]
+     *
+     *   Uso típico en generar():
+     *     - Generar u = random en [0, 1)
+     *     - Buscar el primer índice i donde u <= cdf[i]
+     *     - Retornar valores[i]
+     *
+     *   Ejemplo práctico - Simular lanzamiento de dado sesgado:
+     *     valores = {1, 2, 3, 4, 5, 6}
+     *     probs   = {0.1, 0.1, 0.2, 0.2, 0.2, 0.2}
+     *     cdf     = {0.1, 0.2, 0.4, 0.6, 0.8, 1.0}
+     *     Si u = 0.35, como 0.35 > 0.2 y 0.35 <= 0.4, retorna valores[2] = 3
+     *
+     * @param probs Array de probabilidades individuales que deben sumar 1
+     * @return Array con las probabilidades acumuladas (CDF)
+     */
     private double[] construirCDF(double[] probs) {
         double[] cdf = new double[probs.length];
         double suma = 0;
@@ -33,7 +65,6 @@ public class DistribucionEmpiricaDiscreta implements IGeneradorAleatorio {
             suma += probs[i];
             cdf[i] = suma;
         }
-        // Normalizar en caso de error de punto flotante
         cdf[cdf.length - 1] = 1.0;
 
         double total = 0;

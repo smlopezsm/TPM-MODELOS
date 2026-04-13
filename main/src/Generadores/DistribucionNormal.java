@@ -39,9 +39,9 @@ public class DistribucionNormal implements IGeneradorAleatorio {
     @Override
     public double generar() {
         // Java usa el algoritmo Box-Muller internamente en nextGaussian()
-        double valor = media + desviacion * random.nextGaussian();
+        double valor = media + desviacion * random.nextGaussian(); //hay que estandarizar las varibles para la normal. z = media- mu /desviacion
         return soloPositivos ? Math.max(0, valor) : valor;
-    }
+    } // ver que son las tecnicas de convulucion y ver si podemos aplicar esta tecnica para porder crear variables normales apartir de esta distribuciom.
 
     @Override
     public String toString() {

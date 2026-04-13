@@ -1,0 +1,19 @@
+generar las variables  deseadaas vamos a utilizar el metodo inverso a la z= x-u/varianza
+
+z aprox= N(n*u_x, n*var*2_x)
+
+Tecnica de Transformada Inversa
+Generacion de Variables aleatoria-Discreta-Empirica (montecarlo)
+Ejemplo de algoritmo
+
+Generar R U (0...1)
+
+si R <= 0,25
+    return (x = 25Ns)
+si 0,25 < R <= 0,90
+    return (x = 26)
+else
+    return (x = 27)
+
+
+Generacion de variables aletorias continuas empiricas (Interpolacion)

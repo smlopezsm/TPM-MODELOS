@@ -2,25 +2,43 @@
 
 Simulación de eventos discretos de un sistema de aterrizaje de aviones con una pista.
 
+**Autores:** Ángel Leonel Sanchez Dis, Valentín Luca De Francesco, Santiago López
+
 ## Estructura del Proyecto
 
 ```
 main/src/
-├── Main.java                      # Punto de entrada (simula hasta t=100)
+├── Main.java                      # Punto de entrada
 ├── Entidades/
 │   └── Avion.java                 # Entidad avión con tiempos de arribo/aterrizaje
+├── Estadisticas.java             # Recopilación de estadísticas (Singleton)
 ├── Eventos/
 │   ├── Event.java                 # Interfaz para eventos
 │   ├── Arrival.java               # Evento de llegada de avión
 │   ├── EndOfService.java          # Evento de fin de servicio (aterrizaje)
 │   └── FutureEventList.java       # Lista de eventos futuros (FEL)
+├── Generadores/
+│   ├── IGeneradorAleatorio.java          # Interfaz para generadores
+│   ├── DistribucionEmpiricaDiscreta.java # Distribución empírica discreta
+│   ├── DistribucionPoisson.java          # Distribución de Poisson
+│   ├── DistribucionNormal.java           # Distribución normal
+│   ├── DistribucionUniforme.java         # Distribución uniforme
+│   └── DistribucionExponencial.java      # Distribución exponencial
 ├── Recursos/
 │   └── Pista.java                 # Pista con cola de espera
 └── Tablas/
     ├── DiscreteveProbability.java       # Interfaz funcional
-    ├── TiempoAleatorioTablaUno.java       # Tiempos entre llegadas
-    └── TiempoAleatorioTablaDos.java       # Tiempos de aterrizaje
+    ├── TiempoAleatorioTablaUno.java     # Tiempos entre llegadas
+    └── TiempoAleatorioTablaDos.java     # Tiempos de aterrizaje
 ```
+
+## Patrones de Diseño
+
+- **Strategy**: La interfaz `Event` con implementaciones `Arrival` y `EndOfService` permite encapsular algoritmos de eventos intercambiables.
+- **Command**: Los eventos encapsulan las acciones a ejecutar mediante el método `execute(Pista, FutureEventList)`.
+- **Singleton**: La clase `Estadisticas` utiliza el patrón Singleton (`getInstancia()`) para mantener estadísticas globales de la simulación.
+- **Strategy (Generadores)**: La interfaz `IGeneradorAleatorio` permite interchangeable algoritmos de generación de números aleatorios.
+- **Priority Queue**: `FutureEventList` actúa como una cola de prioridad ordenando eventos por tiempo de ejecución.
 
 ## Distribución de Tiempos
 

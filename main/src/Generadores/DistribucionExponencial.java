@@ -24,7 +24,7 @@ public class DistribucionExponencial implements IGeneradorAleatorio{
         do{ //ln(0) = infinito lo que rompe el codigo, por lo que usamos el do while como proteccion a este caso.
             u=random.nextDouble();
         }while ( u == 0.0);
-        return -media * Math.log(u);
+        return -media * Math.log(u); //(-1/labda)*(ln (1-r)) formula de clase al sacar la inversa a la formula de la expornencial.
     }
 
     public double getMedia(){

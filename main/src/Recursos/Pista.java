@@ -16,7 +16,7 @@ public class Pista {
         this.ocupada = false;
         this.colaDeEspera = new LinkedList<>();
         this.maxTamCola = 0;
-        this.minTamCola = Integer.MAX_VALUE;
+        this.minTamCola = Integer.MAX_VALUE; //2147483647
     }
 
     public boolean isOcupada() {

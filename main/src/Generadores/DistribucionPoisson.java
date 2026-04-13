@@ -19,7 +19,7 @@ public class DistribucionPoisson implements IGeneradorAleatorio {
     }
 
     @Override
-    public double generar() {
+    public double generar() { //Aca se aplica la texnicas de caracterizacion? ver tecnicas de aceptacion y Rechazo
         // Algoritmo de Knuth: P(X=k) = e^(-λ) * λ^k / k! Estudiarlo mejor
         double L = Math.exp(-lambda);
         int k = 0;
