@@ -1,3 +1,11 @@
+# TEAM 3
+
+# hacer modelo de dominio (diagrama de clases)
+
+# sacar estadisticas de minimos a la mrd
+
+# hacer proyecto maven
+
 # Simulador de Sistema de Aterrizaje
 
 Simulación de eventos discretos de un sistema de aterrizaje de aviones con una pista.
