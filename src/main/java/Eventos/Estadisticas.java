@@ -56,11 +56,11 @@ public class Estadisticas {
 
         System.out.println("\n--- TIEMPOS DE OCIO (PISTA) ---");
         double proporcionOcio = (ocioTotal / tiempoSimulacion) * 100;
-        System.out.println(String.format("Total: %.2f (%.2f%% del tiempo) | Máx: %.2f | Mín (>0): %.2f",
+        System.out.println(String.format("Total: %.2f (%.2f%% del tiempo) | Máx: %.2f",
                 ocioTotal, proporcionOcio, ocioMax));
 
         System.out.println("\n--- ESTADO DE LA COLA ---");
-        System.out.println(String.format("Tamaño Máximo: %d | Tamaño Mínimo (>0): %d", maxCola));
+        System.out.println(String.format("Tamaño Máximo: %d", maxCola));
         System.out.println("==================================================");
     }
 }
