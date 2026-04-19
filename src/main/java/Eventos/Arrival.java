@@ -51,6 +51,9 @@ public class Arrival implements Event {
         }
         //esto es de la etapa 1
         //tiempoParaElProximo = tabla1.delta();
+
+        //pistas.getTamanoCola().min
+
         fel.insert(new Arrival(this.clock + tiempoParaElProximo));
     }
 

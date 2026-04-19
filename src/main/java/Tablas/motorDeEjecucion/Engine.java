@@ -46,6 +46,8 @@ public class Engine {
                         clock,
                         eventoActual.getClass().getSimpleName(),
                         pista.getMaxTamanoCola()));*/
+
+                  
             }
             
             if (pistas.get(0).isOcupada()) {
