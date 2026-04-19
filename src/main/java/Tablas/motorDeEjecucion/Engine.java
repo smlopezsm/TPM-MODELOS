@@ -6,22 +6,23 @@ import Eventos.Event;
 import Eventos.FutureEventList;
 import Eventos.Estadisticas;
 import Generadores.DistribucionEmpiricaDiscreta;
+import java.util.List;
 
 
 public class Engine {
 
     private double clock;
     private double tiempoFinSimulacion;
-    private Pista pista;
+    private List<Pista> pistas;
     private FutureEventList lef;
     //private int cantServer;
     //private DistribucionEmpiricaDiscreta[] distribuciones;
     //private Aleatorizador aleatorizador;
     
-    public Engine(double tiempoFinSimulacion, double clock, Pista pista, FutureEventList lef/*, int cantServer, DistribucionEmpiricaDiscreta[] distribuciones ,Aleatorizador aleatorizador*/) {
+    public Engine(double tiempoFinSimulacion, double clock, List<Pista> pistas, FutureEventList lef/*, int cantServer, DistribucionEmpiricaDiscreta[] distribuciones ,Aleatorizador aleatorizador*/) {
         this.tiempoFinSimulacion = tiempoFinSimulacion;
         this.clock = clock;
-        this.pista = pista;
+        this.pistas = pistas;
         this.lef = lef;
         //this.cantServer = cantServer;
         //this.distribuciones = distribuciones;
@@ -39,7 +40,7 @@ public class Engine {
                 Event eventoActual = lef.inminent();
                 clock = eventoActual.clock();
                 //if (clock > tiempoFinSimulacion) break;
-                eventoActual.execute(pista, lef);
+                eventoActual.execute(pistas.get(0), lef);
 
                /*System.out.println(String.format("[%.0f] Ejecutando: %-15s | Cola en pista: %d",
                         clock,
@@ -47,11 +48,11 @@ public class Engine {
                         pista.getMaxTamanoCola()));*/
             }
             
-            if (pista.isOcupada()) {
+            if (pistas.get(0).isOcupada()) {
                 Estadisticas.getInstancia().finalizarOcio(clock);
             }
 
-            Estadisticas.getInstancia().mostrarReporte(clock, pista.getMaxTamanoCola());
+            Estadisticas.getInstancia().mostrarReporte(clock, pistas.get(0).getMaxTamanoCola());
 
 
         } catch (Exception e) {
@@ -60,14 +61,12 @@ public class Engine {
 
 
         //Prueba de  CFC con tabla 2
-        double[] valores = {8.00,10.00,13.00,15.00};
-        double[] prob = {0.38,0.32,0.1,0.2};
-        DistribucionEmpiricaDiscreta D = new DistribucionEmpiricaDiscreta(valores, prob);
+        // double[] valores = {8.00,10.00,13.00,15.00};
+        // double[] prob = {0.38,0.32,0.1,0.2};
+        // DistribucionEmpiricaDiscreta D = new DistribucionEmpiricaDiscreta(valores, prob);
 
-        for (int i = 0; i < 4; i++) {
-            System.out.println(D.generar());
-        }
+        // for (int i = 0; i < 4; i++) {
+        //     System.out.println(D.generar());
+        // }
     }
-        // Inicializar variables y estructuras necesarias para la simulación
-    
 }
