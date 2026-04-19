@@ -17,14 +17,24 @@ public class EndOfService implements Event {
 
     @Override
     public void execute(Pista pista, FutureEventList fel)  {
-        // (mandar estos datos a una clase "Estadisticas" global)
+        Pista pistaReal = pista;
+        if (avionSaliendo.getPistaAsignada() != null) {
+            pistaReal = avionSaliendo.getPistaAsignada();
+        }
+
         double tiempoEspera = avionSaliendo.getTiempoInicioAterrizaje() - avionSaliendo.getTiempoArribo();
         double tiempoTransito = this.clock - avionSaliendo.getTiempoArribo();
         Estadisticas.getInstancia().registrarAterrizaje(tiempoEspera, tiempoTransito);
 
+        if(pistaReal.getDurabilidad()>0){
+            pistaReal.desgaste();
+        }else{
+            //no sabemos todavia, preguntar al profe ma;ama
+        }
 
-        if (pista.hayCola()) {
-            Avion proximoAvion = pista.sacarDeCola();
+
+        if (pistaReal.hayCola()) {
+            Avion proximoAvion = pistaReal.sacarDeCola();
 
             proximoAvion.setTiempoInicioAterrizaje(this.clock);
             
@@ -32,9 +42,10 @@ public class EndOfService implements Event {
             tiempoAterrizaje = tabla2.delta();
             fel.insert(new EndOfService(this.clock + tiempoAterrizaje, proximoAvion));
         } else {
-            pista.setOcupada(false);
+            pistaReal.setOcupada(false);
             Estadisticas.getInstancia().iniciarOcio(this.clock);
         }
+
     }
 
     @Override

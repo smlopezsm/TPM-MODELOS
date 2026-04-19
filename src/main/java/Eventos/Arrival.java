@@ -24,19 +24,41 @@ public class Arrival implements Event {
 
     @Override
     public void execute(Pista pista, FutureEventList fel)  {
+        execute(pista, fel, null);
+    }
+
+    public void execute(Pista pista, FutureEventList fel, java.util.List<Pista> todasLasPistas) {
         Estadisticas.getInstancia().registrarArribo();
         Avion nuevoAvion = new Avion(contadorAviones++, this.clock);
 
-        if (pista.isOcupada()) {
-            pista.agregarACola(nuevoAvion);
+        Pista pistaSeleccionada = null;
+
+        if (todasLasPistas != null) {
+            pistaSeleccionada = buscarPistaLibre(todasLasPistas);
+            if (pistaSeleccionada == null) {
+                pistaSeleccionada = buscarPistaColaMasCorta(todasLasPistas);
+            }
+        } else {
+            pistaSeleccionada = pista;
+        }
+
+        if (pistaSeleccionada == null || pistaSeleccionada.isOcupada()) {
+            if (todasLasPistas != null) {
+                pistaSeleccionada = buscarPistaColaMasCorta(todasLasPistas);
+            } else {
+                pistaSeleccionada = pista;
+            }
+        }
+
+        if (pistaSeleccionada.isOcupada()) {
+            pistaSeleccionada.agregarACola(nuevoAvion);
         } else {
             Estadisticas.getInstancia().finalizarOcio(this.clock);
-            pista.setOcupada(true);
+            pistaSeleccionada.setOcupada(true);
             nuevoAvion.setTiempoInicioAterrizaje(this.clock);
+            nuevoAvion.setPistaAsignada(pistaSeleccionada);
             
             double tiempoAterrizaje;
-            //esto es de la etapa 1
-            //tiempoAterrizaje = tabla2.delta();
             tiempoAterrizaje = distribucionUniforme.generar();
             fel.insert(new EndOfService(this.clock + tiempoAterrizaje, nuevoAvion));
         }
@@ -62,5 +84,28 @@ public class Arrival implements Event {
 
     @Override
     public int order() {return this.order;}
+
+    private Pista buscarPistaLibre(java.util.List<Pista> pistas) {
+        for (Pista pista : pistas) {
+            if (!pista.isOcupada()) {
+                return pista;
+            }
+        }
+        return null;
+    }
+
+    private Pista buscarPistaColaMasCorta(java.util.List<Pista> pistas) {
+        Pista pistaMinCola = pistas.get(0);
+        int minCola = pistaMinCola.getTamanoCola();
+
+        for (Pista pista : pistas) {
+            int tamCola = pista.getTamanoCola();
+            if (tamCola < minCola) {
+                minCola = tamCola;
+                pistaMinCola = pista;
+            }
+        }
+        return pistaMinCola;
+    }
 
 }

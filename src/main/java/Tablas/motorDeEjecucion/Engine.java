@@ -7,6 +7,7 @@ import Eventos.FutureEventList;
 import Eventos.Estadisticas;
 import Generadores.DistribucionEmpiricaDiscreta;
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class Engine {
@@ -40,7 +41,11 @@ public class Engine {
                 Event eventoActual = lef.inminent();
                 clock = eventoActual.clock();
                 //if (clock > tiempoFinSimulacion) break;
-                eventoActual.execute(pistas.get(0), lef);
+                if (eventoActual instanceof Arrival) {
+                    ((Arrival) eventoActual).execute(pistas.get(0), lef, pistas);
+                } else {
+                    eventoActual.execute(pistas.get(0), lef);
+                }
 
                /*System.out.println(String.format("[%.0f] Ejecutando: %-15s | Cola en pista: %d",
                         clock,
