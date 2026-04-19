@@ -60,13 +60,13 @@ public class Engine {
 
 
         //Prueba de  CFC con tabla 2
-        double[] valores = {8.00,10.00,13.00,15.00};
+       /* double[] valores = {8.00,10.00,13.00,15.00};
         double[] prob = {0.38,0.32,0.1,0.2};
         DistribucionEmpiricaDiscreta D = new DistribucionEmpiricaDiscreta(valores, prob);
 
         for (int i = 0; i < 4; i++) {
             System.out.println(D.generar());
-        }
+        }*/
     }
         // Inicializar variables y estructuras necesarias para la simulación
     
