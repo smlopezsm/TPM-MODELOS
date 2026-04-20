@@ -2,11 +2,13 @@
 
 # hacer modelo de dominio (diagrama de clases)
 
-# sacar estadisticas de minimos a la mrd
-
-# hacer proyecto maven
+# variables aleatorias entra en el parcial
 
 # Simulador de Sistema de Aterrizaje
+
+# consultar tamaños de pistas, ver que pasa cuando se termina las 4 semanas, estadisticas por pistas o general, durabilidad de las pistas puede ser negativa? o que se hace.
+
+# preguntar si el tam maximo de la cola de espera es cantidad de aviones o cantidad de tiempo?
 
 Simulación de eventos discretos de un sistema de aterrizaje de aviones con una pista.
 
