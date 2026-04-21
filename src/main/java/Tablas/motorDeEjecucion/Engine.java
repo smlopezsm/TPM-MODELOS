@@ -59,7 +59,8 @@ public class Engine {
                 Estadisticas.getInstancia().finalizarOcio(clock);
             }
 
-            Estadisticas.getInstancia().mostrarReporte(clock, pistas.get(0).getMaxTamanoCola());
+            //etapa1
+            //Estadisticas.getInstancia().mostrarReporte(clock, pistas.get(0).getMaxTamanoCola());
 
 
         } catch (Exception e) {
