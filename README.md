@@ -81,3 +81,9 @@ java Main
 - **Cola**: FIFO (primero en llegar, primero en aterrizar)
 - **Eventos**: Arrival (llegada) y EndOfService (fin de servicio)
 - **Bootstrap**: El primer evento es una llegada en t=0
+
+
+## Modelo de Dominio UML
+
+
+<img src="assets/DiagramaUMLSimulacion.png" alt="Diagrama UML" width="1100"/>
