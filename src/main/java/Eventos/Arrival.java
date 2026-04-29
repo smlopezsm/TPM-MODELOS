@@ -53,7 +53,7 @@ public class Arrival implements Event {
         if (pistaSeleccionada.isOcupada()) {
             pistaSeleccionada.agregarACola(nuevoAvion);
         } else {
-            Estadisticas.getInstancia().finalizarOcio(this.clock);
+            Estadisticas.getInstancia().finalizarOcio(pistaSeleccionada.getId(),this.clock);
             pistaSeleccionada.setOcupada(true);
             nuevoAvion.setTiempoInicioAterrizaje(this.clock);
             nuevoAvion.setPistaAsignada(pistaSeleccionada);

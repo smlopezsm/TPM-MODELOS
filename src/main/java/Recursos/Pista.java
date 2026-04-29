@@ -4,9 +4,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 import Entidades.Avion;
 import Generadores.DistribucionNormal;
+import Eventos.Estadisticas;
 
 public class Pista {
-    //private int id;
+    private int id;
     private boolean ocupada;
     private Queue<Avion> colaDeEspera;
     private int maxTamCola;
@@ -14,7 +15,7 @@ public class Pista {
     private DistribucionNormal DN= new DistribucionNormal(5,1);
 
     public Pista(int id) {
-        //this.id = id;
+        this.id = id;
         this.ocupada = false;
         this.colaDeEspera = new LinkedList<>();
         this.maxTamCola = 0;
@@ -41,11 +42,31 @@ public class Pista {
         setDurabilidad(getDurabilidad()-DN.generar());
     }
 
+    public int getId(){return this.id;}
 
-    public void agregarACola(Avion avion) {
+    private double inicioOcioActual = 0;
+    //etapa 1
+   /* public void agregarACola(Avion avion) {
         colaDeEspera.add(avion);
         int tamActual = colaDeEspera.size();
 
+        if (tamActual > maxTamCola) {
+            maxTamCola = tamActual;
+        }
+    }*/
+    public void setOcupada(boolean ocupada, double clock) {
+        if (this.ocupada && !ocupada) {
+            this.inicioOcioActual = clock;
+        } else if (!this.ocupada && ocupada) {
+            double duracion = clock - inicioOcioActual;
+            Estadisticas.getInstancia().finalizarOcio(this.id,clock);
+        }
+        this.ocupada = ocupada;
+    }
+    public void agregarACola(Avion avion) {
+        colaDeEspera.add(avion);
+        int tamActual = colaDeEspera.size();
+        Estadisticas.getInstancia().registrarTamanoCola(tamActual);
         if (tamActual > maxTamCola) {
             maxTamCola = tamActual;
         }

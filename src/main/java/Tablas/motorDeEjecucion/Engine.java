@@ -32,19 +32,22 @@ public class Engine {
     }
 
     public void run() {
-        Estadisticas.getInstancia().iniciarOcio(0);
+
+        Estadisticas.getInstancia().inicializarPistas(pistas.size());
+        for (Pista p:pistas) {Estadisticas.getInstancia().iniciarOcio(p.getId(),clock);}
 
         lef.insert(new Arrival(0));
 
         try {
             while (clock <= tiempoFinSimulacion) {
+
                 Event eventoActual = lef.inminent();
                 clock = eventoActual.clock();
                 //if (clock > tiempoFinSimulacion) break;
                 if (eventoActual instanceof Arrival) {
-                    ((Arrival) eventoActual).execute(pistas.get(0), lef, pistas);
+                    ((Arrival) eventoActual).execute(null, lef, pistas);
                 } else {
-                    eventoActual.execute(pistas.get(0), lef);
+                    eventoActual.execute(null, lef);
                 }
 
                /*System.out.println(String.format("[%.0f] Ejecutando: %-15s | Cola en pista: %d",
@@ -54,13 +57,17 @@ public class Engine {
 
                   
             }
-            
-            if (pistas.get(0).isOcupada()) {
-                Estadisticas.getInstancia().finalizarOcio(clock);
+            for (Pista p : pistas) {
+                if (!p.isOcupada()) {
+                    Estadisticas.getInstancia().finalizarOcio(p.getId(),clock);
+                }
             }
+           /* if (pistas.get(0).isOcupada()) {
+                Estadisticas.getInstancia().finalizarOcio(clock);
+            }*/
 
             //etapa1
-            //Estadisticas.getInstancia().mostrarReporte(clock, pistas.get(0).getMaxTamanoCola());
+            Estadisticas.getInstancia().mostrarReporte(clock, pistas);
 
 
         } catch (Exception e) {
@@ -77,4 +84,5 @@ public class Engine {
         //     System.out.println(D.generar());
         // }
     }
+
 }

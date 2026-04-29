@@ -26,11 +26,9 @@ public class EndOfService implements Event {
         double tiempoTransito = this.clock - avionSaliendo.getTiempoArribo();
         Estadisticas.getInstancia().registrarAterrizaje(tiempoEspera, tiempoTransito);
 
-        if(pistaReal.getDurabilidad()>0){
+
             pistaReal.desgaste();
-        }else{
-            //no sabemos todavia, preguntar al profe ma;ama
-        }
+
 
 
         if (pistaReal.hayCola()) {
@@ -43,7 +41,7 @@ public class EndOfService implements Event {
             fel.insert(new EndOfService(this.clock + tiempoAterrizaje, proximoAvion));
         } else {
             pistaReal.setOcupada(false);
-            Estadisticas.getInstancia().iniciarOcio(this.clock);
+            Estadisticas.getInstancia().iniciarOcio(pistaReal.getId(),this.clock);
         }
 
     }
