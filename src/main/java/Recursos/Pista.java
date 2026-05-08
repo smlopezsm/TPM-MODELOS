@@ -87,4 +87,17 @@ public class Pista {
     public int getTamanoCola() {
         return colaDeEspera.size();
     }
+
+    @Override
+    public String toString() {
+        return "Pista{" +
+                "id=" + id +
+                ", ocupada=" + ocupada +
+                ", colaDeEspera=" + colaDeEspera +
+                ", maxTamCola=" + maxTamCola +
+                ", durabilidad=" + durabilidad +
+                ", DN=" + DN +
+                ", inicioOcioActual=" + inicioOcioActual +
+                '}';
+    }
 }

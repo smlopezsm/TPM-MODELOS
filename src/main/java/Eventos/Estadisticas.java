@@ -3,7 +3,7 @@ package Eventos;
 import Recursos.Pista;
 import java.util.List;
 public class Estadisticas {
-    private static Estadisticas instancia;
+    private static Estadisticas instancia; // Patron singleton
 
     private int totalArribos = 0;
     private int totalAterrizajes = 0;
@@ -25,6 +25,7 @@ public class Estadisticas {
         if (instancia == null) instancia = new Estadisticas();
         return instancia;
     }
+
     public void inicializarPistas(int cantidadPistas) {
         ocioTotal = new double[cantidadPistas];
         ocioMax = new double[cantidadPistas];

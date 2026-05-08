@@ -8,6 +8,8 @@ import Tablas.TiempoAleatorioTablaDos;
 import Generadores.DistribucionExponencial;
 import Generadores.DistribucionUniforme;
 
+import java.util.List;
+
 public class Arrival implements Event {
 	private double clock;
 	private int order = 100;
@@ -18,33 +20,31 @@ public class Arrival implements Event {
     private DistribucionUniforme distribucionUniforme = new DistribucionUniforme(10,25);
     private DistribucionExponencial distribucionExponencial_15 = new DistribucionExponencial(15);
     private DistribucionExponencial distribucionExponencial_9 = new DistribucionExponencial(9);
+
+
 	public Arrival(double clock){
 		this.clock = clock;
 	}
 
-    @Override
-    public void execute(Pista pista, FutureEventList fel)  {
-        execute(pista, fel, null);
-    }
 
-    public void execute(Pista pista, FutureEventList fel, java.util.List<Pista> todasLasPistas) {
-        Estadisticas.getInstancia().registrarArribo();
+    public void execute(List<Pista> pistas, FutureEventList fel) {
+        Estadisticas.getInstancia().registrarArribo(); //todavia no entiendo esto
+
         Avion nuevoAvion = new Avion(contadorAviones++, this.clock);
 
-        Pista pistaSeleccionada = null;
-
-        if (todasLasPistas != null) {
-            pistaSeleccionada = buscarPistaLibre(todasLasPistas);
+        Pista pistaSeleccionada = null; // esto no debe de ser asi, porque como pista base deberia de ser la pistaa 1
+        if (pistas != null) {
+            pistaSeleccionada = buscarPistaLibre(pistas);
             if (pistaSeleccionada == null) {
-                pistaSeleccionada = buscarPistaColaMasCorta(todasLasPistas);
+                pistaSeleccionada = buscarPistaColaMasCorta(pistas);
             }
         } else {
             pistaSeleccionada = pista;
         }
 
         if (pistaSeleccionada == null || pistaSeleccionada.isOcupada()) {
-            if (todasLasPistas != null) {
-                pistaSeleccionada = buscarPistaColaMasCorta(todasLasPistas);
+            if (pistas != null) {
+                pistaSeleccionada = buscarPistaColaMasCorta(pistas);
             } else {
                 pistaSeleccionada = pista;
             }
@@ -91,7 +91,7 @@ public class Arrival implements Event {
                 return pista;
             }
         }
-        return null;
+        return null; //tenornemos 1 o 0, el null puede dar problemas
     }
 
     private Pista buscarPistaColaMasCorta(java.util.List<Pista> pistas) {

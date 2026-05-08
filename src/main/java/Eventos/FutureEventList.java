@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class FutureEventList{
-    private List<Event> events;
+    private List<Event> events; //No existe la clase Event!!!, estamos haciendo una lista de interfaces
     private Comparator<Event> comparator;
 
     public FutureEventList() {
