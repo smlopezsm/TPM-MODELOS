@@ -20,7 +20,7 @@ public class Main {
         FutureEventList lef = new FutureEventList();
         //int cantServer = 1;
 
-    Engine engine = new Engine(40320,0,
+    Engine engine = new Engine(403,0,
         pistas,lef/*,cantServer,distribuciones, aleatorizador*/);
         
         engine.run();
