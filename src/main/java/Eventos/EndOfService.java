@@ -18,7 +18,7 @@ public class EndOfService implements Event {
     @Override
     public void execute(Pista pista, FutureEventList fel)  {
         Pista pistaReal = pista;
-        if (avionSaliendo.getPistaAsignada() != null) {
+        if (avionSaliendo.getPistaAsignada() != null) { //la pista asignada por defecto es la pista 1, por lo que no tiene sentido que hagamos esta tipo de test
             pistaReal = avionSaliendo.getPistaAsignada();
         }
 
@@ -27,7 +27,7 @@ public class EndOfService implements Event {
         Estadisticas.getInstancia().registrarAterrizaje(tiempoEspera, tiempoTransito);
 
 
-            pistaReal.desgaste();
+        pistaReal.desgaste();
 
 
 
